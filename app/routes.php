@@ -9,6 +9,9 @@ $app->match('/link/{id}', "Watson\Controller\HomeController::linkAction")->bind(
 // List links with same tag
 $app->match('/tag/{id}', "Watson\Controller\HomeController::tagAction")->bind('tag');
 
+//Flux rss
+$app->get('/rss', "Watson\Controller\HomeController::rssAction")->bind('rss');
+
 // Login form
 $app->get('/login', "Watson\Controller\HomeController::loginAction")->bind('login');
 
