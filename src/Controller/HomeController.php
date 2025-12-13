@@ -72,35 +72,43 @@ class HomeController {
     //pour le flux rss
      public function rssAction(Application $app) {
 
-        //récup des 15 derniers liens sous forme de tableau en uilisant la méthode crée "findRss" dans LinkDAO
-        $links = $app['dao.link']->findRss();
+    // Récup des 15 derniers liens
+    $links = $app['dao.link']->findRss();
 
-        //formatage pour le flux rss
-            $rssXml = '<?xml version="1.0" encoding="UTF-8"?>';
-            $rssXml .= '<rss version="2.0">';
-            $rssXml .= '<channel>';
-            $rssXml .= '<title>Watson – Derniers liens</title>';
-            //ici il faut donner dynamquement le lien du site actuel qui héberge le flux
-            $rssXml .= '<link>' . $app['request_stack']->getCurrentRequest()->getSchemeAndHttpHost() . '</link>';
-            $rssXml .= '<description>Les 15 derniers liens publiés sur Watson</description>';
+    // Formatage pour le flux RSS
+    $rssXml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $rssXml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
+    $rssXml .= '<channel>';
+    $rssXml .= '<title>Watson – Derniers liens</title>';
+    $rssXml .= '<link>' . $app['request_stack']->getCurrentRequest()->getSchemeAndHttpHost() . '</link>';
+    $rssXml .= '<description>Les 15 derniers liens publiés sur Watson</description>';
 
-            // Ajouter chaque lien comme item
-            foreach ($links as $link) {
-                $rssXml .= '<item>';
-                $rssXml .= '<title>' . htmlspecialchars($link->getTitle()) . '</title>';
-                $rssXml .= '<link>' . htmlspecialchars($link->getUrl()) . '</link>';
-                $rssXml .= '<description>' . htmlspecialchars($link->getDesc()) . '</description>';
-                if ($link->getUser()) {
-                    $rssXml .= '<author>' . htmlspecialchars($link->getUser()->getUsername()) . '</author>';
-                }
-                $rssXml .= '<guid>' . htmlspecialchars($link->getId()) . '</guid>';
-                $rssXml .= '</item>';
-            }
+    // Ajouter l'atom:link self pour la compatibilité
+    $rssXml .= '<atom:link href="' . $app['request_stack']->getCurrentRequest()->getSchemeAndHttpHost() . '/rss" rel="self" type="application/rss+xml" />';
 
-            $rssXml .= '</channel>';
-            $rssXml .= '</rss>';
-            
-            // retourner la résponse
-            return new Response($rssXml, 200, ['Content-Type' => 'application/rss+xml']);
+    // Ajouter chaque lien comme item
+    foreach ($links as $link) {
+        $rssXml .= '<item>';
+        $rssXml .= '<title>' . htmlspecialchars($link->getTitle(), ENT_XML1 | ENT_COMPAT, 'UTF-8') . '</title>';
+        $rssXml .= '<link>' . htmlspecialchars($link->getUrl(), ENT_XML1 | ENT_COMPAT, 'UTF-8') . '</link>';
+        $rssXml .= '<description>' . htmlspecialchars($link->getDesc(), ENT_XML1 | ENT_COMPAT, 'UTF-8') . '</description>';
+
+        // Author doit être une adresse email pour RSS valide
+        if ($link->getUser()) {
+            // placeholder email si pas d'email réel
+            $rssXml .= '<author>' . htmlspecialchars($link->getUser()->getUsername() . '@example.com (' . $link->getUser()->getUsername() . ')', ENT_XML1 | ENT_COMPAT, 'UTF-8') . '</author>';
         }
+
+        // guid doit être un URL ou isPermaLink="false"
+        $rssXml .= '<guid isPermaLink="false">' . htmlspecialchars($link->getId(), ENT_XML1 | ENT_COMPAT, 'UTF-8') . '</guid>';
+
+        $rssXml .= '</item>';
+    }
+
+    $rssXml .= '</channel>';
+    $rssXml .= '</rss>';
+
+    // Retourner la réponse
+    return new Response($rssXml, 200, ['Content-Type' => 'application/rss+xml']);
+}
 }
