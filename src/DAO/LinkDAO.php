@@ -48,7 +48,7 @@ class LinkDAO extends DAO
 
     // méthode pour le rss
 
-    public function findRSS() {
+    public function findRss() {
         $sql = "
             SELECT * 
             FROM tl_liens 
