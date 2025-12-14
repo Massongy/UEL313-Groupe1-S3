@@ -1,34 +1,280 @@
-body { 
-    padding-top: 100px; 
+/*=====================
+   BASE
+===================== */
+body {
+  padding-top: 90px;
+  background-color: #f1f3f8;
+  color: #2c2c2c;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#logo{
-	width:230px;
-	height: 0;
-	display: block;
-	overflow: hidden;
-	padding-top: 76px;
-	font-size: 0;
-	background: url("../images/logo.png") no-repeat center center;
+a {
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+.link-meta {
+  margin-top: 10px;
 }
 
-.footer {
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    text-align: center;
-    margin-top: 30px;
+/* =====================
+   HEADER
+===================== */
+.navbar {
+  background-color: #1f3c88;
+  border: none;
 }
 
-.articleTitle:hover, .articleTitle:focus {
-    text-decoration: none;
+.navbar a {
+  color: #1c8688 !important;
+  font-weight: 500;
 }
 
+.navbar a:hover {
+  color: #4df0f3;
+}
+
+/* Logo */
+#logo {
+  width: 220px;
+  height: 0;
+  padding-top: 70px;
+  background: url("../images/logo.png") no-repeat center;
+  background-size: contain;
+  display: block;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+  max-width: 1100px;
+}
+/* Espace entre la navbar et le contenu */
+.main-content,
+.container {
+  margin-top: 40px;
+}
+
+/* =====================
+   LINK CARDS (HOME)
+===================== */
+.link-card {
+  margin-top: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.row > [class^="col-"] {
+  display: flex;
+}
+
+.link-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.link-title a {
+  color: #1f3c88; /* bleu actuel */
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.link-title a:hover {
+  color: #4df0f3; /* vert émeraude vif */
+}
+
+.link-desc {
+  font-size: 1.25rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.link-open {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* =====================
+   TAGS
+===================== */
+.tag {
+  display: inline-block;
+  background: #eaeaea;
+  color: #444;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 34px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.tag:hover {
+  background: #4df0f3;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* =====================
+   ADMIN TABLE
+===================== */
 .adminTable {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* =====================
+   FOOTER
+===================== */
+.footer {
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+.page-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 0 0 25px;
+}
+
+/* =====================
+   ERRORS
+===================== */
 #errorPanel {
-    padding-top: 30px;
-    padding-bottom: 10px;
+  margin-top: 40px;
+}
+
+/* ===== ADMIN ===== */
+
+/* espace sous la navbar */
+body {
+  padding-top: 120px;
+}
+
+/* grand titre */
+h1,
+h2 {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* bloc admin central */
+.admin-wrap,
+.adminTable {
+  margin-top: 25px;
+}
+
+.admin-card,
+.panel,
+.well,
+.tab-content {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* tabs  */
+.nav-tabs {
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.nav-tabs > li {
+  float: none;
+  display: inline-block;
+}
+.nav-tabs > li > a {
+  border: none !important;
+  background: transparent;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li > a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #45ffd7; /* bleu/émeraude vif */
+}
+
+/* table */
+.table {
+  background: transparent;
+  margin: 0;
+}
+.table > thead > tr > th {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  font-size: 15px;
+  color: #111;
+  padding: 14px 12px;
+}
+.table > tbody > tr > td {
+  padding: 14px 12px;
+  vertical-align: middle;
+  font-size: 15px;
+}
+.table > tbody > tr {
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.table > tbody > tr:hover {
+  background: rgba(69, 255, 215, 0.08);
+  transform: translateY(-1px);
+}
+
+/* liens titres */
+.table a,
+.adminTable a {
+  text-decoration: none !important;
+  font-weight: 700;
+}
+.table a:hover,
+.adminTable a:hover {
+  color: #45ffd7 !important;
+}
+
+/* boutons */
+.btn {
+  border-radius: 10px;
+  font-weight: 700;
+}
+.btn-primary {
+  background: #1f3c88;
+  border-color: #1f3c88;
+}
+.btn-primary:hover {
+  background: #18306f;
+  border-color: #18306f;
+}
+
+/*  icônes edit/delete */
+.btn-xs,
+.btn-sm {
+  border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 140px;
+  }
 }
