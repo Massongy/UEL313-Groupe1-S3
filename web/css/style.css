@@ -163,118 +163,93 @@ a:focus {
   margin-top: 40px;
 }
 
-/* ===== ADMIN ===== */
+/* =====================
+   ADMIN TABS 
+===================== */
 
-/* espace sous la navbar */
-body {
-  padding-top: 120px;
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+  margin: 25px 0 20px;
 }
 
-/* grand titre */
-h1,
-h2 {
-  font-weight: 800;
-  letter-spacing: -0.5px;
+/* onglets */
+.nav-tabs > li {
+  float: left;          /* Bootstrap 3 NORMAL */
+  margin-bottom: -1px;
 }
 
-/* bloc admin central */
-.admin-wrap,
-.adminTable {
-  margin-top: 25px;
+.nav-tabs > li > a {
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 16px;
+
+  color: #1f3c88;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px 10px 0 0;
+
+  text-decoration: none;
 }
 
-.admin-card,
-.panel,
-.well,
+/* hover */
+.nav-tabs > li > a:hover {
+  background: #f1f3f8;
+  border-color: #ddd #ddd transparent;
+}
+
+/* onglet actif */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  background: #4df0f3;
+  color: #1f3c88;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
 .tab-content {
   background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-/* tabs  */
-.nav-tabs {
-  border-bottom: none;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 12px 12px 12px;
+  padding: 20px;
 }
 .nav-tabs > li {
-  float: none;
-  display: inline-block;
+  float: left;
+  margin-bottom: -1px;
+  margin-right: 8px; /* espace entre Links / Users */
 }
-.nav-tabs > li > a {
-  border: none !important;
+
+/* =====================
+   NAVBAR - boutons (Administration / Login / Welcome)
+===================== */
+
+/* cible les liens de droite dans la navbar */
+.navbar .navbar-nav > li > a,
+.navbar .navbar-nav > li > a.btn,
+.navbar .navbar-nav > li > a.btn:focus {
   background: transparent;
-  font-weight: 700;
-  padding: 12px 18px;
+  border: 2px solid #4df0f3;   
+  color: #4df0f3;
   border-radius: 12px;
-  color: rgba(255, 255, 255, 0.85);
-}
-.nav-tabs > li.active > a,
-.nav-tabs > li > a:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #45ffd7; /* bleu/émeraude vif */
+  padding: 10px 16px;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+  box-shadow: none;
 }
 
-/* table */
-.table {
+/* hover */
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus {
+  background: rgba(77, 240, 243, 0.12);
+  color: #ffffff;
+  border-color: #4df0f3;
+}
+
+/* retire le fond noir  */
+.navbar .btn,
+.navbar .btn-default,
+.navbar .btn-inverse {
   background: transparent;
-  margin: 0;
-}
-.table > thead > tr > th {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-  font-size: 15px;
-  color: #111;
-  padding: 14px 12px;
-}
-.table > tbody > tr > td {
-  padding: 14px 12px;
-  vertical-align: middle;
-  font-size: 15px;
-}
-.table > tbody > tr {
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.table > tbody > tr:hover {
-  background: rgba(69, 255, 215, 0.08);
-  transform: translateY(-1px);
-}
-
-/* liens titres */
-.table a,
-.adminTable a {
-  text-decoration: none !important;
-  font-weight: 700;
-}
-.table a:hover,
-.adminTable a:hover {
-  color: #45ffd7 !important;
-}
-
-/* boutons */
-.btn {
-  border-radius: 10px;
-  font-weight: 700;
-}
-.btn-primary {
-  background: #1f3c88;
-  border-color: #1f3c88;
-}
-.btn-primary:hover {
-  background: #18306f;
-  border-color: #18306f;
-}
-
-/*  icônes edit/delete */
-.btn-xs,
-.btn-sm {
-  border-radius: 10px;
-}
-
-@media (max-width: 992px) {
-  body {
-    padding-top: 140px;
-  }
+  border: 2px solid #4df0f3;
+  color: #4df0f3;
 }
