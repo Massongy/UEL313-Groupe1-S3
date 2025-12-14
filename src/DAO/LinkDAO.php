@@ -185,6 +185,13 @@ class LinkDAO extends DAO
 
     //     return $_links;
     // }
+
+    /**
+ * Récupère une liste de liens paginée pour l’espace d’administration.
+ * Les paramètres $limit et $offset permettent de limiter l’affichage
+ * à un nombre précis de liens par page.
+ * Les résultats sont triés du plus récent au plus ancien.
+ */
     public function findAllPaginated($limit, $offset)
 {
     $limit  = (int) $limit;
