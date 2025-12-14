@@ -17,13 +17,41 @@ class AdminController {
      *
      * @param Application $app Silex application
      */
-    public function indexAction(Application $app) {
-        $links = $app['dao.link']->findAll();
-        $users = $app['dao.user']->findAll();
-        return $app['twig']->render('admin.html.twig', array(
-            'links' => $links,
-            'users' => $users));
-    }
+/**
+ * Page d'administration avec pagination des liens
+ */
+public function indexAction(Application $app)
+{
+    // 1. Numéro de page (minimum = 1)
+    $page = max(1, (int) $app['request']->get('page', 1));
+
+    // 2. Nombre de liens par page
+    $limit = 15;
+
+    // 3. Calcul du décalage SQL
+    $offset = ($page - 1) * $limit;
+
+    // 4. Récupération des liens paginés
+    $links = $app['dao.link']->findAllPaginated($limit, $offset);
+
+    // 5. Nombre total de liens (pour la pagination)
+    $totalLinks = $app['dao.link']->countAll();
+
+    // 6. Nombre total de pages
+    $totalPages = (int) ceil($totalLinks / $limit);
+
+    // 7. Récupération des utilisateurs (inchangé)
+    $users = $app['dao.user']->findAll();
+
+    // 8. Envoi des données à Twig
+    return $app['twig']->render('admin.html.twig', array(
+        'links'       => $links,
+        'users'       => $users,
+        'page'        => $page,
+        'totalPages'  => $totalPages
+    ));
+}
+    
 
     /**
      * Add link controller.
