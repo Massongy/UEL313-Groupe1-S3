@@ -2,21 +2,38 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}
-	<div class="row">
-		{% for link in links %}
-			<div class="col-md-4">
-			    <h2><a class="linkTitle" href="{{ path('link', { 'id': link.id }) }}">{{ link.title }}</a></h2>
-			    <p>{{ link.desc }}</p>
-			    <a href="{{ link.url }}" title="" target="_blank">Open ></a>
-			    <em>(by {{ link.user.username }})</em>
 
-			    {% for tag in link.tags %}
-			    	<a href="{{ path('tag', { 'id': tag.id }) }}" title="Filtrer">
-			    		{{ tag.title }}
-			    	</a>
-			    {% endfor %}
-			</div>
-		{% endfor %}
-	</div>
+{% block content %}
+
+<div class="row">
+  {% for link in links %}
+    <div class="col-md-4">
+      <article class="link-card">
+        <h2 class="link-title">
+          <a class="linkTitle" href="{{ path('link', { 'id': link.id }) }}">
+            {{ link.title }}
+          </a>
+        </h2>
+
+        <p class="link-desc">{{ link.desc }}</p>
+
+        <div class="link-meta">
+          <a class="link-open" href="{{ link.url }}" target="_blank">Open →</a>
+          <em>(by {{ link.user.username }})</em>
+        </div>
+
+        {% if link.tags is not empty %}
+          <div class="link-tags">
+            {% for tag in link.tags %}
+              <a class="tag-pill" href="{{ path('tag', { 'id': tag.id }) }}">
+                {{ tag.title }}
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </article>
+    </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

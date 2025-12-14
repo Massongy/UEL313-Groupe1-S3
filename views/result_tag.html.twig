@@ -3,6 +3,7 @@
 {% block title %}Résultat(s) pour "{{ tag.title }}" {% endblock %}
 
 {% block content %}
+{#
 	<div class="row">
 		<h1>Résultat(s) associé(s) au tag "{{ tag.title }}"</h1>
 		{% if links|length <= 0 %}
@@ -25,4 +26,40 @@
 			{% endfor %}
 		{% endif %}
 	</div>
+{% endblock %}
+
+#}
+
+  <h1 class="page-title">Résultat(s) associé(s) au tag "{{ tag.title }}"</h1>
+
+  <div class="row watson-grid">
+    {% for link in links %}
+      <div class="col-md-4">
+        <article class="link-card">
+          <h2 class="link-title">
+            <a href="{{ path('link', { 'id': link.id }) }}">
+              {{ link.title }}
+            </a>
+          </h2>
+
+          <p class="link-desc">{{ link.desc }}</p>
+
+          <div class="link-meta">
+            <a class="link-open" href="{{ link.url }}" target="_blank" rel="noopener">Open →</a>
+            <em>(by {{ link.user.username }})</em>
+          </div>
+
+          {% if link.tags is not empty %}
+            <div class="link-tags">
+              {% for t in link.tags %}
+                <a class="tag-pill" href="{{ path('tag', { 'id': t.id }) }}">
+                  {{ t.title }}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </article>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
