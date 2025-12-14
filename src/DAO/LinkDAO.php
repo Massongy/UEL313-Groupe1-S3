@@ -185,4 +185,55 @@ class LinkDAO extends DAO
     public function deleteAllByUser($userId) {
         $this->getDb()->delete('tl_liens', array('user_id' => $userId));
     }
+
+    // public function findAllPaginated($limit, $offset)
+    // {
+    //     $sql = "
+    //         SELECT *
+    //         FROM tl_liens
+    //         ORDER BY lien_id DESC
+    //         LIMIT ? OFFSET ?
+    //     ";
+
+    //     $result = $this->getDb()->fetchAll($sql, array($limit, $offset));
+
+    //     $_links = array();
+    //     foreach ($result as $row) {
+    //         $linkId = $row['lien_id'];
+    //         $_links[$linkId] = $this->buildDomainObject($row);
+    //     }
+
+    //     return $_links;
+    // }
+    public function findAllPaginated($limit, $offset)
+{
+    $limit  = (int) $limit;
+    $offset = (int) $offset;
+
+    $sql = "
+        SELECT *
+        FROM tl_liens
+        ORDER BY lien_id DESC
+        LIMIT $limit OFFSET $offset
+    ";
+
+    $result = $this->getDb()->fetchAll($sql);
+
+    $_links = array();
+    foreach ($result as $row) {
+        $linkId = $row['lien_id'];
+        $_links[$linkId] = $this->buildDomainObject($row);
+    }
+
+    return $_links;
+}
+
+
+    /**
+     * Retourne le nombre total de liens en base
+     */
+    public function countAll() {
+        $sql = "SELECT COUNT(*) FROM tl_liens";
+        return (int) $this->getDb()->fetchColumn($sql);
+    }
 }

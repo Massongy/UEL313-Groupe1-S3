@@ -62,6 +62,17 @@
                 </tr>
                 {% endfor %}
             </table>
+            <div class="text-center">
+            {% if page > 1 %}
+                <a href="{{ path('admin', {'page': page - 1}) }}">Page précédente</a>
+            {% endif %}
+
+            <span>Page {{ page }} / {{ totalPages }}</span>
+
+            {% if page < totalPages %}
+                <a href="{{ path('admin', {'page': page + 1}) }}">Page suivante</a>
+            {% endif %}
+        </div>
         </div>
         {% else %}
         <div class="alert alert-warning">No links found.</div>
